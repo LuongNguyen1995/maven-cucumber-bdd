@@ -1,5 +1,7 @@
 package stepDefinitions;
 
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -7,21 +9,26 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import cucumber.api.DataTable;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
 import cucumber.api.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class FacebookSteps {
 
 	WebDriver driver;
-	@Given("^Open facebook application$")
+	
+	@Before("@parameter")
 	public void openFacebookApplication()  {
 	    WebDriverManager.firefoxdriver().setup();
 	    driver = new FirefoxDriver();
 	    driver.get("https://www.facebook.com/");
 	    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	}
+	
+	@After("@parameter")
+	public void closeApplication()  {
+	   driver.quit();
 	}
 	
 	@When("^Input to Username textbox$")
@@ -73,19 +80,23 @@ public class FacebookSteps {
 	}
 
 	@When("^Input to Username and Password$")
-	public void inputToUsernameAndPassword(DataTable arg1)  {
-	    // Write code here that turns the phrase above into concrete actions
-	    // For automatic transformation, change DataTable to one of
-	    // List<YourType>, List<List<E>>, List<Map<K,V>> or Map<K,V>.
-	    // E,K,V must be a scalar (String, Integer, Date, enum etc)
-	}
-	
-	@Then("^Verify submitted infor displayed$")
-	public void verifySubmittedInforDisplayed(DataTable arg1)  {
-	    // Write code here that turns the phrase above into concrete actions
-	    // For automatic transformation, change DataTable to one of
-	    // List<YourType>, List<List<E>>, List<Map<K,V>> or Map<K,V>.
-	    // E,K,V must be a scalar (String, Integer, Date, enum etc)
+	public void inputToUsernameAndPassword(DataTable table)  {
+		List<Map<String,String>> customer = table.asMaps(String.class, String.class);
+		
+//		driver.findElement(By.id("email")).clear();
+//		driver.findElement(By.id("email")).sendKeys(customer.get(0).get("Username"));
+//		
+//		driver.findElement(By.id("pass")).clear();
+//		driver.findElement(By.id("pass")).sendKeys(customer.get(0).get("Password"));
+
+		//Thường dùng để verify data
+		for (Map<String, String> loginInfor : table.asMaps(String.class, String.class)) {
+			driver.findElement(By.id("email")).clear();
+			driver.findElement(By.id("email")).sendKeys(loginInfor.get("Username"));
+			
+			driver.findElement(By.id("pass")).clear();
+			driver.findElement(By.id("pass")).sendKeys(loginInfor.get("Password"));
+		}
 	}
 
 	@When("^Click to Submit button$")
@@ -94,8 +105,5 @@ public class FacebookSteps {
 	}
 
 	
-	@And("^Close application$")
-	public void closeApplication()  {
-	   driver.quit();
-	}
+
 }
