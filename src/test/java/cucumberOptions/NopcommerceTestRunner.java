@@ -8,13 +8,15 @@ import cucumber.api.junit.Cucumber;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-		features = "src\\test\\java\\features",
-		glue = "stepDefinitions",
+		//Đường dẫn tới file feature
+		features = "src\\test\\java\\nopcommerce\\features",
+		//Tìm đến package step def
+		glue = "nopcommerce.stepDefinitions",
 		//dryRun = true,
 		monochrome = true,
 		plugin = {"pretty", "html:target/site/cucumber-report-default","json:target/site/cucumber.json"},
 		snippets = SnippetType.CAMELCASE,
-		tags = {"@parameter"})
-public class TestRunner {
+		tags = {"@register_login"})
+public class NopcommerceTestRunner {
 
 }
