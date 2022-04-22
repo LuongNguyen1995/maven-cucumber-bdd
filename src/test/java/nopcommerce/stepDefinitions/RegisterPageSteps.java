@@ -25,24 +25,24 @@ public class RegisterPageSteps extends BasePage{
 		registerPage = PageGeneratorManager.getUserRegisterPage(driver);
 		dataTest = DataUtil.getData();
 	}
-	@Given("^Input Fistname and Lastname and Email and Password$")
-	public void inputFistnameAndLastnameAndEmailAndPassword() {
-		password = dataTest.getPassword();
-		registerPage.inputToFirstnameTextbox(dataTest.getFirstName());
-		registerPage.inputToLastnameTextbox(dataTest.getLastName());
-		registerPage.inputToEmailTextbox(dataTest.getEmailAddress());
-		registerPage.inputToPasswordTextbox(password);
-		registerPage.inputToConfirmPasswordTextbox(password);
-	}
+//	@Given("^Input Fistname and Lastname and Email and Password$")
+//	public void inputFistnameAndLastnameAndEmailAndPassword() {
+//		password = dataTest.getPassword();
+//		registerPage.inputToFirstnameTextbox(dataTest.getFirstName());
+//		registerPage.inputToLastnameTextbox(dataTest.getLastName());
+//		registerPage.inputToEmailTextbox(dataTest.getEmailAddress());
+//		registerPage.inputToPasswordTextbox(password);
+//		registerPage.inputToConfirmPasswordTextbox(password);
+//	}
 
-	@When("^Click to Register button$")
-	public void clickToRegisterButton() {
-		registerPage.clickToRegisterButton();
-	}
-	
-	@Then("^Register successfully$")
-	public void registerSuccessfully()  {
-		Assert.assertEquals(registerPage.getRegisterSuccessMessage(), "Your registration completed");
-	}
+//	@When("^Click to Register button$")
+//	public void clickToRegisterButton() {
+//		registerPage.clickToRegisterButton();
+//	}
+//	
+//	@Then("^Register successfully$")
+//	public void registerSuccessfully()  {
+//		Assert.assertEquals(registerPage.getRegisterSuccessMessage(), "Your registration completed");
+//	}
 
 }

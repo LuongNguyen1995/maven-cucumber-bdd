@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 import pageObjects.nopCommerce.admin.AdminDashboardPageObject;
 import pageObjects.nopCommerce.admin.AdminLoginPageObject;
+import pageObjects.nopCommerce.user.CommonPageObject;
 import pageObjects.nopCommerce.user.UserAddressPageObject;
 import pageObjects.nopCommerce.user.UserCustomerInforPageObject;
 import pageObjects.nopCommerce.user.UserHomePageObject;
@@ -50,6 +51,9 @@ public class PageGeneratorManager {
 		return new AdminDashboardPageObject(driver);
 	}
 	
+	public static CommonPageObject getCommonPage(WebDriver driver) {
+		return new CommonPageObject(driver);
+	}
 	
 	
 }
